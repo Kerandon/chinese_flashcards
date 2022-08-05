@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>review_page.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ebebeb;}
+.s1 { color: #54b33e;}
+.s2 { color: #ed864a; font-weight: bold;}
+.s3 { color: #ed864a;}
+.s4 { color: #33ccff; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+review_page.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'package:flutter/material.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter_flashcards/components/app/custom_appbar.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter_flashcards/components/review_page/header_button.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter_flashcards/configs/constants.dart'</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">'../components/review_page/word_tile.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'../models/word.dart'</span><span class="s2">;</span>
+
+<span class="s3">class </span><span class="s0">ReviewPage </span><span class="s3">extends </span><span class="s0">StatefulWidget {</span>
+  <span class="s3">const </span><span class="s0">ReviewPage({Key? key}) : </span><span class="s3">super</span><span class="s0">(key: key)</span><span class="s2">;</span>
+  <span class="s0">@override</span>
+  <span class="s0">State&lt;ReviewPage&gt; createState() =&gt; _ReviewPageState()</span><span class="s2">;</span>
+<span class="s0">}</span>
+
+<span class="s3">class </span><span class="s0">_ReviewPageState </span><span class="s3">extends </span><span class="s0">State&lt;ReviewPage&gt; {</span>
+
+  <span class="s3">final </span><span class="s0">_listKey = GlobalKey&lt;AnimatedListState&gt;()</span><span class="s2">;</span>
+
+  <span class="s0">List&lt;Word&gt; _reviewWords = [</span>
+
+  <span class="s0">]</span><span class="s2">;</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+    <span class="s3">return </span><span class="s0">Scaffold(</span>
+      <span class="s0">appBar: PreferredSize(</span>
+          <span class="s0">preferredSize: Size.fromHeight(kAppBarHeight)</span><span class="s2">,</span>
+          <span class="s0">child: CustomAppBar())</span><span class="s2">,</span>
+      <span class="s0">body: Column(</span>
+        <span class="s0">children: [</span>
+          <span class="s0">Expanded(</span>
+            <span class="s0">child: Row(</span>
+              <span class="s0">children: [</span>
+                <span class="s0">HeaderButton(title: </span><span class="s1">'Insert'</span><span class="s2">, </span><span class="s0">onTap: (){</span>
+                  <span class="s0">_insertWord(word:</span>
+                  <span class="s0">Word(topic: </span><span class="s1">&quot;City&quot;</span><span class="s2">, </span><span class="s0">english: </span><span class="s1">&quot;Hospital&quot;</span><span class="s2">, </span><span class="s0">pinyin: </span><span class="s1">&quot;Yī Yuàn&quot;</span><span class="s2">, </span><span class="s0">character: </span><span class="s1">&quot;医院&quot;</span><span class="s0">)</span><span class="s2">,</span><span class="s0">)</span><span class="s2">;</span>
+                <span class="s0">}</span><span class="s2">,</span><span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">HeaderButton(title: </span><span class="s1">'Insert List'</span><span class="s2">, </span><span class="s0">onTap: (){</span>
+                  <span class="s3">final </span><span class="s0">_wordsToAdd = [</span>
+                    <span class="s0">Word(topic: </span><span class="s1">&quot;Drinks&quot;</span><span class="s2">, </span><span class="s0">english: </span><span class="s1">&quot;Juice&quot;</span><span class="s2">, </span><span class="s0">pinyin: </span><span class="s1">&quot;Guǒ Zhī&quot;</span><span class="s2">, </span><span class="s0">character: </span><span class="s1">&quot;果汁&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">Word(topic: </span><span class="s1">&quot;City&quot;</span><span class="s2">, </span><span class="s0">english: </span><span class="s1">&quot;Hospital&quot;</span><span class="s2">, </span><span class="s0">pinyin: </span><span class="s1">&quot;Yī Yuàn&quot;</span><span class="s2">, </span><span class="s0">character: </span><span class="s1">&quot;医院&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">Word(topic: </span><span class="s1">&quot;School&quot;</span><span class="s2">, </span><span class="s0">english: </span><span class="s1">&quot;School Bag&quot;</span><span class="s2">, </span><span class="s0">pinyin: </span><span class="s1">&quot;Shū Bāo&quot;</span><span class="s2">, </span><span class="s0">character: </span><span class="s1">&quot;书包&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">Word(topic: </span><span class="s1">&quot;Shapes&quot;</span><span class="s2">, </span><span class="s0">english: </span><span class="s1">&quot;Triangle&quot;</span><span class="s2">, </span><span class="s0">pinyin: </span><span class="s1">&quot;Sān Jiǎo Xíng&quot;</span><span class="s2">, </span><span class="s0">character: </span><span class="s1">&quot;三角形&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">Word(topic: </span><span class="s1">&quot;Insects&quot;</span><span class="s2">, </span><span class="s0">english: </span><span class="s1">&quot;Grasshopper&quot;</span><span class="s2">, </span><span class="s0">pinyin: </span><span class="s1">&quot;Zhà Měng&quot;</span><span class="s2">, </span><span class="s0">character: </span><span class="s1">&quot;蚱蜢&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                    <span class="s0">Word(topic: </span><span class="s1">&quot;Weather&quot;</span><span class="s2">, </span><span class="s0">english: </span><span class="s1">&quot;Rain&quot;</span><span class="s2">, </span><span class="s0">pinyin: </span><span class="s1">&quot;Xià Yǔ&quot;</span><span class="s2">, </span><span class="s0">character: </span><span class="s1">&quot;下雨&quot;</span><span class="s0">)</span><span class="s2">,</span>
+                  <span class="s0">]</span><span class="s2">;</span>
+                  <span class="s0">_insertWords(words: _wordsToAdd)</span><span class="s2">;</span>
+                <span class="s0">}</span><span class="s2">,</span><span class="s0">)</span><span class="s2">,</span>
+                <span class="s0">HeaderButton(title: </span><span class="s1">'Clear'</span><span class="s2">, </span><span class="s0">onTap: (){</span>
+                  <span class="s0">_clearAllWords()</span><span class="s2">;</span>
+                <span class="s0">}</span><span class="s2">,</span><span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">]</span><span class="s2">,</span>
+            <span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">)</span><span class="s2">,</span>
+          <span class="s0">Expanded(</span>
+              <span class="s0">flex: </span><span class="s4">10</span><span class="s2">,</span>
+              <span class="s0">child: AnimatedList(</span>
+                <span class="s0">key: _listKey</span><span class="s2">,</span>
+                <span class="s0">initialItemCount: _reviewWords.length</span><span class="s2">,</span>
+                <span class="s0">itemBuilder: (context</span><span class="s2">, </span><span class="s0">index</span><span class="s2">, </span><span class="s0">animation) =&gt;</span>
+                    <span class="s0">WordTile(word: _reviewWords[index]</span><span class="s2">, </span><span class="s0">animation: animation</span><span class="s2">, </span><span class="s0">onTapped: (){</span>
+                      <span class="s0">_removeWord(word: _reviewWords[index])</span><span class="s2">;</span>
+                    <span class="s0">}</span><span class="s2">,</span><span class="s0">)</span><span class="s2">,</span>
+              <span class="s0">))</span>
+        <span class="s0">]</span><span class="s2">,</span>
+      <span class="s0">)</span><span class="s2">,</span>
+    <span class="s0">)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+
+  <span class="s0">_insertWord({required Word word}){</span>
+    <span class="s0">_listKey.currentState?.insertItem(_reviewWords.length)</span><span class="s2">;</span>
+    <span class="s0">_reviewWords.insert(_reviewWords.length</span><span class="s2">, </span><span class="s0">word)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+
+  <span class="s0">_insertWords({required List&lt;Word&gt; words}){</span>
+    <span class="s3">for</span><span class="s0">(int i = </span><span class="s4">0</span><span class="s2">; </span><span class="s0">i &lt; words.length</span><span class="s2">; </span><span class="s0">i++){</span>
+      <span class="s0">_listKey.currentState?.insertItem(i)</span><span class="s2">;</span>
+      <span class="s0">_reviewWords.add(words[i])</span><span class="s2">;</span>
+    <span class="s0">}</span>
+
+  <span class="s0">}</span>
+  
+  <span class="s0">_removeWord({required Word word}){</span>
+    <span class="s0">_listKey.currentState?.removeItem(_reviewWords.indexOf(word)</span><span class="s2">,</span>
+            <span class="s0">duration: Duration(milliseconds: </span><span class="s4">5000</span><span class="s0">)</span><span class="s2">,</span>
+            <span class="s0">(context</span><span class="s2">, </span><span class="s0">animation) =&gt; WordTile(</span>
+        <span class="s0">word: word</span><span class="s2">, </span><span class="s0">animation: animation</span><span class="s2">, </span><span class="s0">onTapped: (){}</span><span class="s2">,</span><span class="s0">))</span><span class="s2">;</span>
+    <span class="s0">_reviewWords.remove(word)</span><span class="s2">;</span>
+  <span class="s0">}</span>
+
+  <span class="s0">_clearAllWords(){</span>
+    <span class="s3">for</span><span class="s0">(int i = </span><span class="s4">0</span><span class="s2">; </span><span class="s0">i &lt; _reviewWords.length</span><span class="s2">; </span><span class="s0">i++){</span>
+      <span class="s0">_listKey.currentState?.removeItem(</span><span class="s4">0</span><span class="s2">, </span><span class="s0">(context</span><span class="s2">, </span><span class="s0">animation) =&gt; WordTile(</span>
+          <span class="s0">word: _reviewWords[i]</span><span class="s2">, </span><span class="s0">animation: animation</span><span class="s2">, </span><span class="s0">onTapped: (){}))</span><span class="s2">;</span>
+    <span class="s0">}</span>
+    <span class="s0">WidgetsBinding.instance.addPostFrameCallback((timeStamp) {</span>
+      <span class="s0">_reviewWords.clear()</span><span class="s2">;</span>
+    <span class="s0">})</span><span class="s2">;</span>
+
+  <span class="s0">}</span>
+<span class="s0">}</span>
+
+</pre>
+</body>
+</html>
